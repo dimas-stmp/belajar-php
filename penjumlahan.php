@@ -19,8 +19,9 @@ echo "Gagal melakukan koneksi ke MySQL: " . mysqli_connect_error();
 	<div class="container">
 		<h2>Penjumlahan Beruntun</h2> 
 	</div>
+	<br>
 	<form class="container" name="form-1" method="POST">
-		<table>
+		<table class="table">
 			<tr>
 				<td>Nilai 1</td>
 				<td>:</td>
@@ -33,8 +34,8 @@ echo "Gagal melakukan koneksi ke MySQL: " . mysqli_connect_error();
 			</tr>
 			<tr align="right">
 				<td colspan="3">
-				<input type="submit" name="submit" value="submit">
-				<input type="reset" name="reset" value="reset">
+				<input class ="btn btn-success" type="submit" name="submit" value="Hitung">
+				<input class ="btn btn-danger" type="submit" name="reset" value="Hapus">
 				</td>
 			</tr>
 		<?php
@@ -55,7 +56,7 @@ echo "Gagal melakukan koneksi ke MySQL: " . mysqli_connect_error();
 
 				}
 			$sql = mysqli_query($koneksi, "INSERT INTO tb_nilai (nilai_a, nilai_b, nilai_c,nilai_keterangan) VALUES('$a', '$b', '$c','$keterangan')") or die(mysqli_error($koneksi));
-			for($i=0;$i<=10;$i++){
+			for($i=0;$i<=9;$i++){
 				$a=$b;
 				$b=$c;
 				$c=$a+$b;
@@ -77,14 +78,18 @@ echo "Gagal melakukan koneksi ke MySQL: " . mysqli_connect_error();
 //			echo "<br><input type='text' value=$c>";
 			echo "<script>alert('Hasil akhir adalah $c');</script>";
 		}
+		if (isset($_POST["reset"])) {
+			$sql = mysqli_query($koneksi, "TRUNCATE tb_nilai") or die(mysqli_error($koneksi));
+			echo "<script>alert('Berhasil dihapus!');</script>";
+		}
 
 		?>
 		</table>
 	</form>
 	<br>
-	<table border="1px">
+	<table class="table table-striped table-bordered" border="1px">
 
-		<thead>
+		<thead class="thead-dark">
 		<tr>
 			<td>ID</td>
 			<td>Nilai 1</td>
